@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from "react";
 import {
   Image,
   ImageBackground,
@@ -6,14 +6,14 @@ import {
   Text,
   TouchableOpacity,
   View,
-} from 'react-native';
-import Images from '../utils/Images';
-import DatePicker from 'react-native-date-picker';
-import moment from 'moment';
-import InputSpinner from 'react-native-input-spinner';
-import SegmentedControl from '@react-native-segmented-control/segmented-control';
-import {hostURL} from '../utils/Constant';
-const CheckoutPage = props => {
+} from "react-native";
+import Images from "../utils/Images";
+import DatePicker from "react-native-date-picker";
+import moment from "moment";
+import InputSpinner from "react-native-input-spinner";
+import SegmentedControl from "@react-native-segmented-control/segmented-control";
+import { hostURL } from "../utils/Constant";
+const CheckoutPage = (props) => {
   const checkoutItem = props.route?.params?.order;
   let initialDeliveryFee = 2;
   const [fromDate, setFromDate] = useState(new Date());
@@ -51,20 +51,20 @@ const CheckoutPage = props => {
   }, [price]);
 
   const handleCheckOutApi = () => {
-    fetch(hostURL + 'meal-subscription', {
-      method: 'POST',
+    fetch(hostURL + "meal-subscription", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
 
       body: JSON.stringify({
-        email: 'bala@foodhub.com',
-        start_date: moment(fromDate).format('YYYY-MM-DD'),
-        end_date: moment(toDate).format('YYYY-MM-DD'),
+        email: "bala@foodhub.com",
+        start_date: moment(fromDate).format("YYYY-MM-DD"),
+        end_date: moment(toDate).format("YYYY-MM-DD"),
         total_amount: finalPrice,
         total_items: quantity,
         amount_paid: finalPrice,
-        payment_type: 'COD',
+        payment_type: "COD",
         time_slot_id: selectedIndex,
         meal_subscription_items: [
           {
@@ -75,18 +75,18 @@ const CheckoutPage = props => {
         ],
       }),
     })
-      .then(response => {
+      .then((response) => {
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error("Network response was not ok");
         }
         return response.json();
       })
-      .then(data => {
-        props.navigation.navigate('Dashboard');
-        console.log('Success:', data);
+      .then((data) => {
+        props.navigation.navigate("Dashboard");
+        console.log("Success:", data);
       })
-      .catch(error => {
-        console.error('Error:', error);
+      .catch((error) => {
+        console.error("Error:", error);
       });
   };
 
@@ -94,40 +94,44 @@ const CheckoutPage = props => {
     <View
       style={{
         flex: 1,
-      }}>
+      }}
+    >
       <ImageBackground
         source={{
           uri: checkoutItem?.image,
         }}
         style={{
           height: 220,
-          width: '100%',
-        }}>
+          width: "100%",
+        }}
+      >
         <View
           style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
             padding: 20,
-          }}>
+          }}
+        >
           <TouchableOpacity onPress={handleBackPress}>
             <Image
-              tintColor={'#ffffff'}
-              style={{height: 40, width: 40}}
+              tintColor={"#ffffff"}
+              style={{ height: 40, width: 40 }}
               source={Images.Previous}
             />
           </TouchableOpacity>
           <TouchableOpacity
             style={{
-              backgroundColor: '#ffffff',
-              alignItems: 'center',
-              alignSelf: 'center',
+              backgroundColor: "#ffffff",
+              alignItems: "center",
+              alignSelf: "center",
               padding: 10,
               borderRadius: 10,
-            }}>
+            }}
+          >
             <Image
-              tintColor={'#e22e2d'}
-              style={{height: 20, width: 20}}
+              tintColor={"#e22e2d"}
+              style={{ height: 20, width: 20 }}
               source={Images.Favourite}
             />
           </TouchableOpacity>
@@ -135,115 +139,126 @@ const CheckoutPage = props => {
       </ImageBackground>
       <View
         style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
           marginHorizontal: 20,
           marginTop: 10,
-        }}>
-        <Text style={{color: '#000000', fontSize: 18, fontWeight: 'bold'}}>
+        }}
+      >
+        <Text style={{ color: "#000000", fontSize: 18, fontWeight: "bold" }}>
           {checkoutItem?.name}
         </Text>
-        <Text style={{color: '#e22e2d', fontSize: 18, fontWeight: 'bold'}}>
-          ${checkoutItem?.price}
+        <Text style={{ color: "#e22e2d", fontSize: 18, fontWeight: "bold" }}>
+          £ {checkoutItem?.price}
         </Text>
       </View>
       <ScrollView>
-        <View style={{marginHorizontal: 20}}>
+        <View style={{ marginHorizontal: 20 }}>
           <Text
             style={{
               marginTop: 20,
-              color: '#000000',
-              fontWeight: 'bold',
+              color: "#000000",
+              fontWeight: "bold",
               fontSize: 20,
-            }}>
+            }}
+          >
             Description
           </Text>
           <Text
             style={{
               marginTop: 10,
-              color: '#000000',
+              color: "#000000",
               fontSize: 16,
-              fontStyle: 'italic',
-            }}>
+              fontStyle: "italic",
+            }}
+          >
             {checkoutItem?.description}
           </Text>
 
-          <View style={{marginTop: 20}}>
+          <View style={{ marginTop: 20 }}>
             <SegmentedControl
-              tabStyle={{height: 100}}
-              values={['Lunch', 'Dinner']}
+              tabStyle={{ height: 100 }}
+              values={["Lunch", "Dinner"]}
               selectedIndex={selectedIndex}
-              onChange={event => {
+              onChange={(event) => {
                 setSelectedIndex(event?.nativeEvent?.selectedSegmentIndex);
               }}
             />
           </View>
-          <View style={{marginTop: 30}}>
-            <Text style={{color: '#000000', fontWeight: 'bold', fontSize: 18}}>
+          <View style={{ marginTop: 30 }}>
+            <Text
+              style={{ color: "#000000", fontWeight: "bold", fontSize: 18 }}
+            >
               Select Date
             </Text>
           </View>
           <View
             style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
               marginTop: 15,
               paddingHorizontal: 10,
-            }}>
+            }}
+          >
             <View>
               <TouchableOpacity
                 onPress={() => setFromDateOpen(true)}
-                style={{flexDirection: 'row', alignItems: 'center'}}>
-                <Text style={{color: '#000000', fontSize: 16}}>
+                style={{ flexDirection: "row", alignItems: "center" }}
+              >
+                <Text style={{ color: "#000000", fontSize: 16 }}>
                   Starts From
                 </Text>
                 <Image
-                  tintColor={'#e22e2d'}
-                  style={{height: 15, width: 15, marginStart: 10}}
+                  tintColor={"#e22e2d"}
+                  style={{ height: 15, width: 15, marginStart: 10 }}
                   source={Images.Edit}
                 />
               </TouchableOpacity>
-              <Text style={{color: '#000000', marginTop: 10, fontSize: 16}}>
-                {moment(fromDate).format('YYYY-MM-DD')}
+              <Text style={{ color: "#000000", marginTop: 10, fontSize: 16 }}>
+                {moment(fromDate).format("YYYY-MM-DD")}
               </Text>
             </View>
             <View>
               <TouchableOpacity
                 onPress={() => setToDateOpen(true)}
-                style={{flexDirection: 'row', alignItems: 'center'}}>
-                <Text style={{color: '#000000', fontSize: 16}}>To End</Text>
+                style={{ flexDirection: "row", alignItems: "center" }}
+              >
+                <Text style={{ color: "#000000", fontSize: 16 }}>To End</Text>
                 <Image
-                  tintColor={'#e22e2d'}
-                  style={{height: 15, width: 15, marginStart: 10}}
+                  tintColor={"#e22e2d"}
+                  style={{ height: 15, width: 15, marginStart: 10 }}
                   source={Images.Edit}
                 />
               </TouchableOpacity>
-              <Text style={{color: '#000000', marginTop: 10, fontSize: 16}}>
-                {moment(toDate).format('YYYY-MM-DD')}
+              <Text style={{ color: "#000000", marginTop: 10, fontSize: 16 }}>
+                {moment(toDate).format("YYYY-MM-DD")}
               </Text>
             </View>
           </View>
           <View
             style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
               marginTop: 30,
-            }}>
-            <Text style={{color: '#000000', fontWeight: 'bold', fontSize: 18}}>
+            }}
+          >
+            <Text
+              style={{ color: "#000000", fontWeight: "bold", fontSize: 18 }}
+            >
               Quantity
             </Text>
             <InputSpinner
-              style={{width: 170}}
+              style={{ width: 170 }}
               max={10}
               min={0}
               step={1}
-              colorLeft={'#e22e2d'}
-              colorRight={'#e22e2d'}
+              colorLeft={"#e22e2d"}
+              colorRight={"#e22e2d"}
               value={quantity}
-              onChange={num => {
+              onChange={(num) => {
                 setQuantity(num);
                 setPrice(num * checkoutItem?.price);
               }}
@@ -252,41 +267,44 @@ const CheckoutPage = props => {
 
           <View
             style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
               marginTop: 20,
-            }}>
-            <Text style={{color: '#000000', fontSize: 16}}>Subtotal</Text>
-            <Text tyle={{color: '#000000', fontSize: 16}}>
+            }}
+          >
+            <Text style={{ color: "#000000", fontSize: 16 }}>Subtotal</Text>
+            <Text tyle={{ color: "#000000", fontSize: 16 }}>
               {price ? price : 0}
             </Text>
           </View>
 
           <View
             style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
               marginTop: 20,
-            }}>
-            <Text style={{color: '#000000', fontSize: 16}}>
+            }}
+          >
+            <Text style={{ color: "#000000", fontSize: 16 }}>
               Delivery Fee ({days}) Days
             </Text>
-            <Text tyle={{color: '#000000', fontSize: 16}}>
+            <Text tyle={{ color: "#000000", fontSize: 16 }}>
               {quantity != 0 ? deliveryFee : 0}
             </Text>
           </View>
 
           <View
             style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
               marginTop: 20,
-            }}>
-            <Text style={{color: '#000000', fontSize: 16}}>Total</Text>
-            <Text tyle={{color: '#000000', fontSize: 16}}>
+            }}
+          >
+            <Text style={{ color: "#000000", fontSize: 16 }}>Total</Text>
+            <Text tyle={{ color: "#000000", fontSize: 16 }}>
               {quantity != 0 ? finalPrice : 0}
             </Text>
           </View>
@@ -295,7 +313,7 @@ const CheckoutPage = props => {
             modal
             open={fromDateOpen}
             date={fromDate}
-            onConfirm={date => {
+            onConfirm={(date) => {
               setFromDateOpen(false);
               setFromDate(date);
             }}
@@ -307,7 +325,7 @@ const CheckoutPage = props => {
             modal
             open={toDateOpen}
             date={toDate}
-            onConfirm={date => {
+            onConfirm={(date) => {
               setToDateOpen(false);
               setToDate(date);
             }}
@@ -321,13 +339,14 @@ const CheckoutPage = props => {
       <TouchableOpacity
         onPress={() => handleCheckOutApi()}
         style={{
-          justifyContent: 'center',
-          alignItems: 'center',
+          justifyContent: "center",
+          alignItems: "center",
           paddingVertical: 20,
-          backgroundColor: quantity == 0 ? 'lightgrey' : '#e22e2d',
-        }}>
-        <Text style={{color: '#ffffff', fontSize: 20, fontWeight: 'bold'}}>
-          Checkout ${quantity != 0 ? finalPrice : 0}
+          backgroundColor: quantity == 0 ? "lightgrey" : "#e22e2d",
+        }}
+      >
+        <Text style={{ color: "#ffffff", fontSize: 20, fontWeight: "bold" }}>
+          Checkout £{quantity != 0 ? finalPrice : 0}
         </Text>
       </TouchableOpacity>
     </View>

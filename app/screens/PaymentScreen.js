@@ -74,7 +74,7 @@ const PaymentScreen = (props) => {
           <View style={{ marginTop: 20 }}>
             <Text style={styles.useCreditsText}>Use Credits</Text>
             <TouchableOpacity onPress={handlePayPress} style={styles.payButton}>
-              <Text style={styles.payText}>Pay ${itemDetails?.total}</Text>
+              <Text style={styles.payText}>Pay £{itemDetails?.total}</Text>
               <Image
                 style={{
                   height: 12,

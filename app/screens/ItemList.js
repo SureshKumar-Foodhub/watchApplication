@@ -100,7 +100,7 @@ const ItemList = props => {
                       fontSize: 18,
                       fontWeight: 'bold',
                     }}>
-                    ${item?.price}
+                    £ {item?.price}
                   </Text>
                 </View>
               </TouchableOpacity>
