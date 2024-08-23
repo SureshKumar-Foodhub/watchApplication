@@ -12,7 +12,7 @@ import Images from '../utils/Images';
 let timeout = null;
 
 const StatusScreen = props => {
-  const [currentStatus, setCurrentStatus] = useState('pickedup');
+  const [currentStatus, setCurrentStatus] = useState('waiting');
 
   useEffect(() => {
     timeout = setTimeout(() => {

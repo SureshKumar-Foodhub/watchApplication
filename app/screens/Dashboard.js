@@ -51,7 +51,7 @@ const DATA = [
 const Dashboard = (props) => {
   const handleNavigation = useCallback(
     (item) => {
-      props.navigation.navigate("CategoriesList", { itemDetails: item });
+      props.navigation.navigate("OrderScreen", { itemDetails: item });
     },
     [props.navigation]
   );

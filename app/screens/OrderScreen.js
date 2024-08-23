@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -7,28 +7,48 @@ import {
   Image,
   Dimensions,
   ScrollView,
-} from 'react-native';
+} from "react-native";
+import Images from "../utils/Images";
 
-const OrderScreen = ({navigation}) => {
+const OrderScreen = (props) => {
+  const itemDetails = props.route?.params?.itemDetails;
   const [quantity, setQuantity] = useState(1);
-  const pricePerItem = 40;
 
   const incrementQuantity = () => setQuantity(quantity + 1);
   const decrementQuantity = () => setQuantity(quantity > 1 ? quantity - 1 : 1);
 
-  const handlePlaceOrder = () => {
-    navigation.navigate('AddressSelectionScreen');
+  const handlePlaceOrder = (total) => {
+    props.navigation.navigate("AddressSelectionScreen", {
+      itemDetails: { ...itemDetails, total },
+    });
+  };
+  const handleBackPress = () => {
+    props.navigation.goBack();
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>For you</Text>
+      <TouchableOpacity
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          marginTop: 10,
+          marginHorizontal: 5,
+        }}
+        onPress={handleBackPress}
+      >
+        <Image
+          style={{ height: 15, width: 15, tintColor: "#FF3B30" }}
+          source={Images.BackIcon}
+        />
+        <Text style={styles.header}>For you</Text>
+      </TouchableOpacity>
+
       <ScrollView>
         <View style={styles.card}>
-          <Image
-            source={{uri: 'https://via.placeholder.com/100x100.png'}} // Replace with actual image URL
-            style={styles.image}
-          />
+          {itemDetails?.image != null && itemDetails?.image != undefined ? (
+            <Image source={itemDetails?.image} style={styles.image} />
+          ) : null}
           <View style={styles.quantityContainer}>
             <TouchableOpacity onPress={decrementQuantity} style={styles.button}>
               <Text style={styles.buttonText}>-</Text>
@@ -38,12 +58,13 @@ const OrderScreen = ({navigation}) => {
               <Text style={styles.buttonText}>+</Text>
             </TouchableOpacity>
           </View>
-          <Text style={styles.itemName}>Chicken Salad</Text>
+          <Text style={styles.itemName}>{itemDetails?.title}</Text>
           <TouchableOpacity
             style={styles.orderButton}
-            onPress={handlePlaceOrder}>
+            onPress={() => handlePlaceOrder(itemDetails.price * quantity)}
+          >
             <Text style={styles.orderButtonText}>
-              ₹{pricePerItem * quantity} Place order
+              $ {itemDetails.price * quantity} Place order
             </Text>
           </TouchableOpacity>
         </View>
@@ -52,80 +73,71 @@ const OrderScreen = ({navigation}) => {
   );
 };
 
-const {width} = Dimensions.get('window');
+const { width } = Dimensions.get("window");
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000',
-    // padding: 15,
-    // alignItems: 'center',
+    backgroundColor: "#000",
   },
   header: {
-    color: '#fff',
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginLeft: 5,
-    // position: 'absolute',
-    // left: 10,
-    // top: 10,
+    color: "#fff",
+    fontSize: 16,
+    marginHorizontal: 5,
   },
   time: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 18,
-    position: 'absolute',
+    position: "absolute",
     right: 10,
     top: 10,
   },
   card: {
-    backgroundColor: '#1C1C1C',
-    margin: 15,
+    backgroundColor: "#1C1C1C",
+    margin: 10,
     borderRadius: 10,
-    alignItems: 'center',
+    alignItems: "center",
   },
   image: {
-    width: 60,
-    height: 60,
-    borderRadius: 50,
+    width: 70,
+    height: 70,
   },
   quantityContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 10,
+    flexDirection: "row",
+    alignItems: "center",
   },
   button: {
-    backgroundColor: '#FF3B30',
+    backgroundColor: "#FF3B30",
     borderRadius: 30,
-    // padding: 5,
     marginHorizontal: 10,
     paddingHorizontal: 6,
   },
   buttonText: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 14,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   quantity: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 18,
   },
   itemName: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 15,
     marginTop: 5,
-    textAlign: 'center'
+    textAlign: "center",
   },
   orderButton: {
-    backgroundColor: '#0080FF',
+    backgroundColor: "#FF3B30",
     borderRadius: 10,
     padding: 10,
     width: width * 0.8,
-    alignItems: 'center',
+    alignItems: "center",
     marginVertical: 10,
   },
   orderButtonText: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 16,
-    textAlign: 'center',
+    textAlign: "center",
   },
 });
 

@@ -1,12 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useCallback } from "react";
 import { TouchableOpacity, View, Image } from "react-native";
 import Images from "../utils/Images";
 
 const SplashScreen = (props) => {
-  useEffect(() => {
-    setTimeout(() => {
-      props.navigation.navigate("Dashboard");
-    }, 2000);
+  const handleNavigation = useCallback(() => {
+    props.navigation.navigate("Dashboard");
   }, []);
 
   return (
@@ -18,7 +16,7 @@ const SplashScreen = (props) => {
         alignItems: "center",
       }}
     >
-      <TouchableOpacity>
+      <TouchableOpacity onPress={handleNavigation}>
         <Image
           source={Images.Foodhub_Logo}
           style={{ width: 120, height: 21 }}

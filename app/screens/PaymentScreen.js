@@ -1,27 +1,4 @@
-// import React from 'react';
-// import {Image, SafeAreaView, Text, TouchableOpacity} from 'react-native';
-// import Images from '../utils/Images';
-
-// const PaymentScreen = props => {
-//   const handleBackPress = () => {
-//     props.navigation.goBack();
-//   };
-
-//   return (
-//     <SafeAreaView>
-//       <TouchableOpacity
-//         style={{flexDirection: 'row', alignItems: 'center'}}
-//         onPress={handleBackPress}>
-//         <Image style={{height: 15, width: 15}} source={Images.BackIcon} />
-//         <Text style={{marginLeft: 10}}>Pay Using</Text>
-//       </TouchableOpacity>
-//     </SafeAreaView>
-//   );
-// };
-
-// export default PaymentScreen;
-
-import React, {useState} from 'react';
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -29,25 +6,28 @@ import {
   StyleSheet,
   ActivityIndicator,
   Image,
-} from 'react-native';
-import Images from '../utils/Images';
+} from "react-native";
+import Images from "../utils/Images";
+import LinearGradient from "react-native-linear-gradient";
 
 let successInterval = null;
 
-const PaymentScreen = props => {
-  const [paymentStatus, setPaymentStatus] = useState('initial');
+const PaymentScreen = (props) => {
+  const itemDetails = props.route?.params?.itemDetails;
+  const [paymentStatus, setPaymentStatus] = useState("initial");
+
   const handleBackPress = () => {
     props.navigation.goBack();
   };
 
   const handlePayPress = () => {
     let successTime = 0;
-    setPaymentStatus('processing');
+    setPaymentStatus("processing");
     successInterval = setInterval(() => {
-      setPaymentStatus('success');
+      setPaymentStatus("success");
       if (successTime >= 1) {
         clearInterval(successInterval);
-        props.navigation.navigate('StatusScreen');
+        props.navigation.navigate("StatusScreen");
       } else {
         successTime = successTime + 1;
       }
@@ -55,48 +35,65 @@ const PaymentScreen = props => {
   };
   return (
     <View style={styles.container}>
-      {paymentStatus === 'initial' && (
-        <View style={{flex: 1}}>
+      {paymentStatus === "initial" && (
+        <View style={{ flex: 1 }}>
           <TouchableOpacity
-            style={{flexDirection: 'row', alignItems: 'center'}}
-            onPress={handleBackPress}>
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              marginTop: 10,
+              marginHorizontal: 5,
+            }}
+            onPress={handleBackPress}
+          >
             <Image
-              style={{height: 15, width: 15, tintColor: 'white'}}
+              style={{ height: 15, width: 15, tintColor: "#FF3B30" }}
               source={Images.BackIcon}
             />
             <Text style={styles.headerText}>Pay Using</Text>
           </TouchableOpacity>
-          <View style={styles.paymentContainer}>
-            <View style={styles.paymentDetails}>
-              <Text style={styles.paymentAppName}>FOODHUB</Text>
-              <Text style={styles.creditsAvailable}>Credits available</Text>
-              <Text style={styles.creditAmount}>₹4000</Text>
-            </View>
-            {/* <TouchableOpacity style={styles.useCreditsButton}>
-            <Text style={styles.useCreditsText}>Use credits</Text>
-          </TouchableOpacity> */}
+          <LinearGradient
+            colors={["#363636", "#1C1C1C", "#0f0f0f"]}
+            style={{
+              justifyContent: "center",
+              borderRadius: 15,
+              marginTop: 10,
+              marginHorizontal: 15,
+              paddingHorizontal: 10,
+              paddingVertical: 10,
+            }}
+          >
+            <Image
+              source={Images.Foodhub_Logo}
+              style={{ width: 90, height: 16 }}
+            />
+            <Text style={styles.creditsAvailable}>Credits available</Text>
+            <Text style={styles.creditAmount}>$ 1550</Text>
+          </LinearGradient>
+          <View style={{ marginTop: 20 }}>
+            <Text style={styles.useCreditsText}>Use Credits</Text>
             <TouchableOpacity onPress={handlePayPress} style={styles.payButton}>
-              <Text style={styles.payText}>Pay ₹434</Text>
+              <Text style={styles.payText}>Pay $ {itemDetails?.total}</Text>
             </TouchableOpacity>
           </View>
         </View>
       )}
 
-      {paymentStatus === 'processing' && (
+      {paymentStatus === "processing" && (
         <View style={styles.processingContainer}>
           <ActivityIndicator size="large" color="#00ff00" />
           <Text style={styles.processingText}>Processing payment</Text>
         </View>
       )}
 
-      {paymentStatus === 'success' && (
+      {paymentStatus === "success" && (
         <View style={styles.successContainer}>
           {/* <View style={styles.successIcon}>
             <Text style={styles.checkMark}>✔</Text>
           </View> */}
           <Image
             source={Images.OrderSuccessful}
-            style={{width: 60, height: 60}}
+            style={{ width: 60, height: 60 }}
           />
           <Text style={styles.successText}>Payment Sucessful</Text>
         </View>
@@ -108,92 +105,89 @@ const PaymentScreen = props => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    backgroundColor: '#000',
+    backgroundColor: "#000",
   },
-  paymentContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    alignContent: 'center',
-    marginTop: 20,
-  },
+
   headerText: {
-    color: '#fff',
-    fontSize: 18,
-    marginLeft: 5,
-  },
-  paymentDetails: {
-    alignItems: 'center',
-    marginBottom: 20,
+    color: "#ffffff",
+    fontSize: 16,
+    marginStart: 5,
   },
   paymentAppName: {
-    color: '#00f',
-    fontSize: 22,
-    fontWeight: 'bold',
+    color: "#ffffff",
+    fontSize: 18,
+    fontWeight: "bold",
   },
   creditsAvailable: {
-    color: '#ccc',
-    fontSize: 14,
+    color: "#ccc",
+    fontStyle: "italic",
+    fontWeight: "bold",
+    fontSize: 12,
+    marginTop: 7,
   },
   creditAmount: {
-    color: '#fff',
-    fontSize: 28,
-    fontWeight: 'bold',
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "700",
+    marginTop: 3,
   },
   useCreditsButton: {
-    backgroundColor: '#222',
+    backgroundColor: "#222",
     paddingVertical: 5,
     paddingHorizontal: 10,
     borderRadius: 5,
     marginBottom: 20,
   },
   useCreditsText: {
-    color: '#fff',
-    fontSize: 16,
+    textAlign: "center",
+    color: "#fff",
+    fontSize: 14,
   },
   payButton: {
-    backgroundColor: '#f00',
-    paddingVertical: 10,
-    paddingHorizontal: 40,
-    borderRadius: 5,
+    backgroundColor: "#f00",
+    justifyContent:'center',
+    paddingVertical: 8,
+    marginHorizontal: 20,
+    borderRadius: 20,
+    paddingHorizontal: 10,
+    marginTop: 10,
   },
   payText: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: 'bold',
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "600",
   },
   processingContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     flex: 1,
   },
   processingText: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 20,
     marginTop: 20,
-    textAlign: 'center',
+    textAlign: "center",
   },
   successContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     flex: 1,
   },
   successIcon: {
-    backgroundColor: '#0f0',
+    backgroundColor: "#0f0",
     borderRadius: 50,
     padding: 20,
   },
   checkMark: {
-    color: '#000',
+    color: "#000",
     fontSize: 40,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   successText: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 20,
     marginTop: 20,
-    textAlign: 'center',
+    textAlign: "center",
   },
 });
 
