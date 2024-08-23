@@ -28,11 +28,11 @@ const PaymentScreen = (props) => {
       setPaymentStatus("success");
       if (successTime >= 1) {
         clearInterval(successInterval);
-        props.navigation.navigate("StatusScreen");
+        props.navigation.navigate("StatusScreen", {itemDetails});
       } else {
         successTime = successTime + 1;
       }
-    }, 5000);
+    }, 1000);
   };
   return (
     <View style={styles.container}>

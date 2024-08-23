@@ -24,5 +24,7 @@ const Images = {
   PastaNew: require('../utils/images/PastaNew.png'),
   Meal: require('../utils/images/Meal.png'),
   OrderSuccessful: require('../utils/images/order_successful.png'),
+  CallAnswer: require('../utils/images/call.png'),
+  CallEnd: require('../utils/images/callend.png')
 };
 export default Images;

@@ -3,6 +3,7 @@ import { TouchableOpacity, View, Image } from "react-native";
 import Images from "../utils/Images";
 
 const SplashScreen = (props) => {
+
   const handleNavigation = useCallback(() => {
     props.navigation.navigate("Dashboard");
   }, []);
