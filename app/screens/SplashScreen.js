@@ -6,7 +6,7 @@ import {useCallback} from 'react';
 
 const SplashScreen = props => {
   const handleNavigation = useCallback(() => {
-    props.navigation.navigate('Dashboard');
+    props.navigation.navigate('OrderScreen');
   }, [props.navigation]);
 
   return (
