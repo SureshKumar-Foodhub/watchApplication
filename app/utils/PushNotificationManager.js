@@ -6,6 +6,8 @@ import RNPermissions, {
   RESULTS,
   checkNotifications,
 } from "react-native-permissions";
+import { navigate, navigationDeferred } from "./navigationUtil";
+import { sendFcmTokenToServer } from "./api";
 
 const PUSH_NOTIFICATION_CHANNEL_ID = "SAMPLE_FOODHUB";
 
@@ -47,8 +49,10 @@ const requestNotificationPermission = async () => {
 const PushNotificationManager = () => {
   useEffect(() => {
     requestToken();
-    displayNotificationInForeground();
     createPushNotificationChannel("FOODHUB", PUSH_NOTIFICATION_CHANNEL_ID);
+    displayNotificationInForeground();
+    onOpenPushNotification();
+    onOpenFromKilledState();
   }, []);
 
   const requestToken = async () => {
@@ -63,8 +67,45 @@ const PushNotificationManager = () => {
     await messaging()
       .getToken()
       .then((fcmToken) => {
-        console.log("fcmToken", fcmToken);
+        sendFcmTokenToServer({ token: fcmToken });
       });
+  };
+
+  const onOpenFromKilledState = () => {
+    messaging()
+      .getInitialNotification()
+      .then(async (remoteMessage) => {
+        navigationDeferred.promise.then(() => {
+          handleNavigation(remoteMessage);
+        });
+      });
+  };
+
+  const handleNavigation = (remoteMessage) => {
+    const data = remoteMessage.data;
+    if (data.screenName === "main") {
+      navigate("Dashboard", {});
+    } else {
+      navigate("StatusScreen", {
+        isDeliveryNotification: true,
+        itemDetails: {
+          address: {
+            label: data.label,
+            address: data.address,
+          },
+        },
+      });
+    }
+  };
+
+  const onOpenPushNotification = () => {
+    messaging().onNotificationOpenedApp((remoteMessage) => {
+      handleNavigation(remoteMessage);
+    });
+
+    // messaging().setBackgroundMessageHandler(async (remoteMessage) => {
+    //   navigate("StatusScreen", { isDeliveryNotification: true });
+    // });
   };
 
   const parseDataFromRemoteMessage = (remoteMessage) => {

@@ -37,7 +37,7 @@ const PaymentScreen = (props) => {
     }, 3000);
   };
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <CurrentTime />
       {paymentStatus === "initial" && (
         <View style={{ flex: 1 }}>
@@ -127,7 +127,7 @@ const PaymentScreen = (props) => {
           >{`${"Payment"}\n${"Sucessful"}`}</Text>
         </View>
       )}
-    </View>
+    </ScrollView>
   );
 };
 
