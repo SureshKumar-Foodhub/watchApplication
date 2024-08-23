@@ -6,6 +6,7 @@ import {
   StyleSheet,
   ActivityIndicator,
   Image,
+  ScrollView,
 } from "react-native";
 import Images from "../utils/Images";
 import LinearGradient from "react-native-linear-gradient";
@@ -36,7 +37,7 @@ const PaymentScreen = (props) => {
     }, 3000);
   };
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <CurrentTime />
       {paymentStatus === "initial" && (
         <View style={{ flex: 1 }}>
@@ -111,7 +112,7 @@ const PaymentScreen = (props) => {
           <Text style={styles.successText}>Payment Sucessful</Text>
         </View>
       )}
-    </View>
+    </ScrollView>
   );
 };
 

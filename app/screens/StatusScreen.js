@@ -15,12 +15,16 @@ import CurrentTime from "./CurrentTime";
 let timeout = null;
 
 const StatusScreen = (props) => {
-  const itemDetails = props.route?.params?.itemDetails;
   const [currentStatus, setCurrentStatus] = useState("waiting");
   const [orderStatus, setOrderStatus] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [timeoutSec, setTimeoutSec] = useState(5);
-  console.log("iten", itemDetails);
+  const [itemDetails, setItemDetails] = useState("");
+
+  useEffect(() => {
+    const itemDetails = props.route?.params?.itemDetails;
+    setItemDetails(itemDetails);
+  }, []);
 
   useEffect(() => {
     if (isValidElement(timeout)) {
@@ -38,13 +42,28 @@ const StatusScreen = (props) => {
         setTimeoutSec(5);
         setCurrentStatus("pickedup");
       } else if (currentStatus === "pickedup") {
-        setTimeoutSec(10);
+        setTimeoutSec(30);
         setCurrentStatus("ontheway");
       } else if (currentStatus === "ontheway") {
         setCurrentStatus("delivered");
       }
     }, timeoutSec * 1000);
+
+    return () => {
+      clearTimeout(timeout);
+    };
   }, [currentStatus, props.navigation, orderStatus, timeoutSec]);
+
+  useEffect(() => {
+    if (props.route?.params && props.route?.params.isDeliveryNotification) {
+      if (isValidElement(timeout)) {
+        clearTimeout(timeout);
+      }
+      setTimeoutSec(30);
+      setItemDetails(props.route.params.itemDetails)
+      setCurrentStatus("ontheway");
+    }
+  }, [props.route.params]);
 
   const handleGotoHome = () => {
     clearTimeout(timeout);

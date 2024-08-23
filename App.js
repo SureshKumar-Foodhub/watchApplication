@@ -7,7 +7,6 @@ LogBox.ignoreAllLogs();
 const App = () => {
   return (
     <>
-      <PushNotificationManager />
       <Routes />
     </>
   );

@@ -12,6 +12,7 @@ import PaymentScreen from '../screens/PaymentScreen';
 import StatusScreen from '../screens/StatusScreen';
 import AddressSelectionScreen from '../screens/AddressSelectionScreen';
 import OrderScreen from '../screens/OrderScreen';
+import PushNotificationManager from '../utils/PushNotificationManager';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +20,7 @@ const StackNavigator = () => {
   return (
     <>
       <StatusBar barStyle={'light-content'} backgroundColor={'#e22e2d'} />
+      <PushNotificationManager />
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
