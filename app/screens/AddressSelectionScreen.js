@@ -9,6 +9,7 @@ import {
   Image,
 } from "react-native";
 import Images from "../utils/Images";
+import { COLORS } from "../utils/Constant";
 
 const AddressSelectionScreen = (props) => {
   const itemDetails = props.route?.params?.itemDetails;
@@ -51,8 +52,8 @@ const AddressSelectionScreen = (props) => {
         onPress={handleBackPress}
       >
         <Image
-          style={{ height: 15, width: 15, tintColor: "#FF3B30" }}
-          source={Images.BackIcon}
+          style={{ height: 15, width: 15, tintColor: COLORS.themeColor }}
+          source={Images.Previous}
         />
         <Text style={styles.header}>Address</Text>
       </TouchableOpacity>
@@ -60,6 +61,7 @@ const AddressSelectionScreen = (props) => {
       <ScrollView>
         {addresses.map(({ label, address }) => (
           <TouchableOpacity
+            activeOpacity={1}
             key={label}
             style={styles.addressContainer}
             onPress={() => selectAddress(label)}
@@ -73,7 +75,7 @@ const AddressSelectionScreen = (props) => {
                 styles.circle,
                 {
                   backgroundColor:
-                    selectedAddress === label ? "#FF3B30" : "#333",
+                    selectedAddress === label ? COLORS.greenColor : "grey",
                   alignItems: "center",
                   justifyContent: "center",
                 },
@@ -148,7 +150,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#333",
   },
   nextButton: {
-    backgroundColor: "#FF3B30",
+    backgroundColor: COLORS.themeColor,
     borderRadius: 10,
     padding: 10,
     margin: 10,

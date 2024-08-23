@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import Images from "../utils/Images";
 import LinearGradient from "react-native-linear-gradient";
+import { COLORS } from "../utils/Constant";
 
 let successInterval = null;
 
@@ -47,8 +48,8 @@ const PaymentScreen = (props) => {
             onPress={handleBackPress}
           >
             <Image
-              style={{ height: 15, width: 15, tintColor: "#FF3B30" }}
-              source={Images.BackIcon}
+              style={{ height: 15, width: 15, tintColor: COLORS.themeColor }}
+              source={Images.Previous}
             />
             <Text style={styles.headerText}>Pay Using</Text>
           </TouchableOpacity>
@@ -65,7 +66,7 @@ const PaymentScreen = (props) => {
           >
             <Image
               source={Images.Foodhub_Logo}
-              style={{ width: 90, height: 16 }}
+              style={{ width: 90, height: 16, tintColor: COLORS.themeColor }}
             />
             <Text style={styles.creditsAvailable}>Credits available</Text>
             <Text style={styles.creditAmount}>$ 1550</Text>
@@ -73,7 +74,16 @@ const PaymentScreen = (props) => {
           <View style={{ marginTop: 20 }}>
             <Text style={styles.useCreditsText}>Use Credits</Text>
             <TouchableOpacity onPress={handlePayPress} style={styles.payButton}>
-              <Text style={styles.payText}>Pay $ {itemDetails?.total}</Text>
+              <Text style={styles.payText}>Pay ${itemDetails?.total}</Text>
+              <Image
+                style={{
+                  height: 12,
+                  width: 12,
+                  tintColor: "#ffffff",
+                  transform: [{ rotate: "180deg" }],
+                }}
+                source={Images.BackIcon}
+              />
             </TouchableOpacity>
           </View>
         </View>
@@ -140,13 +150,15 @@ const styles = StyleSheet.create({
   },
   useCreditsText: {
     textAlign: "center",
-    color: "#fff",
+    color: "#ffffff",
     fontSize: 14,
   },
   payButton: {
-    backgroundColor: "#f00",
-    justifyContent:'center',
-    paddingVertical: 8,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    backgroundColor: COLORS.themeColor,
+    paddingVertical: 10,
     marginHorizontal: 20,
     borderRadius: 20,
     paddingHorizontal: 10,
@@ -154,7 +166,7 @@ const styles = StyleSheet.create({
   },
   payText: {
     color: "#fff",
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: "600",
   },
   processingContainer: {

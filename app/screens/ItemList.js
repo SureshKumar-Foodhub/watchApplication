@@ -34,7 +34,7 @@ const ItemList = props => {
           marginStart: 5,
         }}
         onPress={handleBackPress}>
-        <Image style={{height: 20, width: 20}} source={Images.BackIcon} />
+        <Image style={{height: 20, width: 20}} source={Images.Previous} />
         <Text
           style={{
             color: '#000000',

@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Images from "../utils/Images";
+import { COLORS } from "../utils/Constant";
 
 const DATA = [
   {
@@ -22,7 +23,7 @@ const DATA = [
     id: "2",
     title: "Past Order",
     image: Images.Sandwich,
-    backgroundColor: "#eb4d4b",
+    backgroundColor: COLORS.themeColor,
     price: 50,
   },
   {

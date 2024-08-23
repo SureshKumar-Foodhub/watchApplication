@@ -9,6 +9,7 @@ import {
   ScrollView,
 } from "react-native";
 import Images from "../utils/Images";
+import { COLORS } from "../utils/Constant";
 
 const OrderScreen = (props) => {
   const itemDetails = props.route?.params?.itemDetails;
@@ -38,8 +39,8 @@ const OrderScreen = (props) => {
         onPress={handleBackPress}
       >
         <Image
-          style={{ height: 15, width: 15, tintColor: "#FF3B30" }}
-          source={Images.BackIcon}
+          style={{ height: 15, width: 15, tintColor: COLORS.themeColor }}
+          source={Images.Previous}
         />
         <Text style={styles.header}>For you</Text>
       </TouchableOpacity>
@@ -106,7 +107,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   button: {
-    backgroundColor: "#FF3B30",
+    backgroundColor: COLORS.themeColor,
     borderRadius: 30,
     marginHorizontal: 10,
     paddingHorizontal: 6,
@@ -127,7 +128,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   orderButton: {
-    backgroundColor: "#FF3B30",
+    backgroundColor:  COLORS.themeColor,
     borderRadius: 10,
     padding: 10,
     width: width * 0.8,

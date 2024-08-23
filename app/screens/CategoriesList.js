@@ -3,11 +3,6 @@ import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import Images from "../utils/Images";
 
 const CategoriesList = (props) => {
-  const itemDetails = props.route?.params?.itemDetails;
-
-  // const handleItemNavigation = (productItem) => {
-  //   props.navigation.navigate("ItemList", { productItem: productItem });
-  // };
 
   const handleBackPress = () => {
     props.navigation.goBack();
@@ -28,7 +23,7 @@ const CategoriesList = (props) => {
         }}
         onPress={handleBackPress}
       >
-        <Image style={{ height: 20, width: 20 }} source={Images.BackIcon} />
+        <Image style={{ height: 20, width: 20 }} source={Images.Previous} />
         <Text
           style={{
             color: "#000000",

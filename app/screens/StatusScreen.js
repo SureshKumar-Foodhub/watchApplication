@@ -42,7 +42,7 @@ const StatusScreen = props => {
       <TouchableOpacity onPress={handleBackPress} style={styles.header}>
         <Image
           style={{height: 15, width: 15, tintColor: 'white'}}
-          source={Images.BackIcon}
+          source={Images.Previous}
         />
         <Text style={styles.appTitle}>FOODHUB</Text>
       </TouchableOpacity>
