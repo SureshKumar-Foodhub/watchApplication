@@ -5,7 +5,7 @@ import Images from "../utils/Images";
 const SplashScreen = (props) => {
 
   const handleNavigation = useCallback(() => {
-    props.navigation.navigate("PaymentScreen");
+    props.navigation.navigate("Dashboard");
   }, []);
 
   return (

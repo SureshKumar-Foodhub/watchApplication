@@ -16,7 +16,7 @@ let successInterval = null;
 
 const PaymentScreen = (props) => {
   const itemDetails = props.route?.params?.itemDetails;
-  const [paymentStatus, setPaymentStatus] = useState("processing");
+  const [paymentStatus, setPaymentStatus] = useState("initial");
 
   const handleBackPress = () => {
     props.navigation.goBack();
