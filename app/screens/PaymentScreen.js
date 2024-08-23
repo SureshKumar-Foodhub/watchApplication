@@ -69,7 +69,7 @@ const PaymentScreen = (props) => {
               style={{ width: 90, height: 16, tintColor: COLORS.themeColor }}
             />
             <Text style={styles.creditsAvailable}>Credits available</Text>
-            <Text style={styles.creditAmount}>$ 1550</Text>
+            <Text style={styles.creditAmount}>£ 1550</Text>
           </LinearGradient>
           <View style={{ marginTop: 20 }}>
             <Text style={styles.useCreditsText}>Use Credits</Text>
