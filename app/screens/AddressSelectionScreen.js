@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import Images from "../utils/Images";
 import { COLORS } from "../utils/Constant";
+import CurrentTime from "./CurrentTime";
 
 const AddressSelectionScreen = (props) => {
   const itemDetails = props.route?.params?.itemDetails;
@@ -41,22 +42,23 @@ const AddressSelectionScreen = (props) => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          marginTop: 10,
-          marginHorizontal: 5,
-          marginBottom: 5,
-        }}
-        onPress={handleBackPress}
-      >
-        <Image
-          style={{ height: 15, width: 15, tintColor: COLORS.themeColor }}
-          source={Images.Previous}
-        />
-        <Text style={styles.header}>Address</Text>
-      </TouchableOpacity>
+      <View style={styles.headerContainer}>
+        <TouchableOpacity
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            marginHorizontal: 5,
+          }}
+          onPress={handleBackPress}
+        >
+          <Image
+            style={{ height: 15, width: 15, tintColor: COLORS.themeColor }}
+            source={Images.Previous}
+          />
+          <Text style={styles.header}>Address</Text>
+        </TouchableOpacity>
+        <CurrentTime />
+      </View>
 
       <ScrollView>
         {addresses.map(({ label, address }) => (
@@ -160,6 +162,13 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 15,
     fontWeight: "bold",
+  },
+  headerContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginTop: 10,
+    marginBottom: 5,
   },
 });
 

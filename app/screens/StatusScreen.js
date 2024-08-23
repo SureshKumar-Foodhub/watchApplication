@@ -9,6 +9,7 @@ import {
   Modal,
 } from "react-native";
 import Images from "../utils/Images";
+import CurrentTime from "./CurrentTime";
 
 let timeout = null;
 
@@ -45,6 +46,7 @@ const StatusScreen = (props) => {
   }, [currentStatus, props.navigation, orderStatus, timeoutSec]);
 
   const handleGotoHome = () => {
+    clearTimeout(timeout);
     props.navigation.navigate("SplashScreen");
   };
 
@@ -56,6 +58,11 @@ const StatusScreen = (props) => {
   const handleCallEnd = () => {
     setShowModal(false);
     setCurrentStatus("ontheway");
+    timeout = setTimeout(() => {
+      if (currentStatus === "ontheway") {
+        setCurrentStatus("delivered");
+      }
+    }, timeoutSec * 1000);
   };
 
   const handleCallStart = () => {
@@ -66,28 +73,31 @@ const StatusScreen = (props) => {
   return (
     <View style={styles.container}>
       {/* Header */}
-      <TouchableOpacity onPress={handleBackPress} style={styles.header}>
-        <View
-          style={{
-            width: 17,
-            height: 17,
-            borderRadius: 15,
-            backgroundColor: "#eb4d4b",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+      <View style={styles.headerContainer}>
+        <TouchableOpacity onPress={handleBackPress} style={styles.header}>
+          <View
+            style={{
+              width: 17,
+              height: 17,
+              borderRadius: 15,
+              backgroundColor: "#eb4d4b",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Image
+              style={{ height: 15, width: 15, tintColor: "white" }}
+              source={Images.Previous}
+            />
+          </View>
           <Image
-            style={{height: 15, width: 15, tintColor: 'white'}}
-            source={Images.Previous}
+            style={styles.foodhubLogo}
+            source={Images.Foodhub_Logo}
+            resizeMode="contain"
           />
-        </View>
-        <Image
-          style={styles.foodhubLogo}
-          source={Images.Foodhub_Logo}
-          resizeMode="contain"
-        />
-      </TouchableOpacity>
+        </TouchableOpacity>
+        <CurrentTime />
+      </View>
 
       {/* Order Status */}
       {currentStatus === "waiting" && (
@@ -274,7 +284,6 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 5,
   },
   appTitle: {
     color: "#eb4d4b",
@@ -394,6 +403,11 @@ const styles = StyleSheet.create({
     // padding: 8,
     // borderRadius: 10,
     marginTop: 25,
+  },
+  headerContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
 });
 

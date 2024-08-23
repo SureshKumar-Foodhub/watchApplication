@@ -10,12 +10,13 @@ import {
 import Images from "../utils/Images";
 import LinearGradient from "react-native-linear-gradient";
 import { COLORS } from "../utils/Constant";
+import CurrentTime from "./CurrentTime";
 
 let successInterval = null;
 
 const PaymentScreen = (props) => {
   const itemDetails = props.route?.params?.itemDetails;
-  const [paymentStatus, setPaymentStatus] = useState("initial");
+  const [paymentStatus, setPaymentStatus] = useState("processing");
 
   const handleBackPress = () => {
     props.navigation.goBack();
@@ -28,31 +29,34 @@ const PaymentScreen = (props) => {
       setPaymentStatus("success");
       if (successTime >= 1) {
         clearInterval(successInterval);
-        props.navigation.navigate("StatusScreen", {itemDetails});
+        props.navigation.navigate("StatusScreen", { itemDetails });
       } else {
         successTime = successTime + 1;
       }
-    }, 1000);
+    }, 3000);
   };
   return (
     <View style={styles.container}>
       {paymentStatus === "initial" && (
         <View style={{ flex: 1 }}>
-          <TouchableOpacity
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              marginTop: 10,
-              marginHorizontal: 5,
-            }}
-            onPress={handleBackPress}
-          >
-            <Image
-              style={{ height: 15, width: 15, tintColor: COLORS.themeColor }}
-              source={Images.Previous}
-            />
-            <Text style={styles.headerText}>Pay Using</Text>
-          </TouchableOpacity>
+          <View style={styles.headerContainer}>
+            <TouchableOpacity
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                marginTop: 10,
+                marginHorizontal: 5,
+              }}
+              onPress={handleBackPress}
+            >
+              <Image
+                style={{ height: 15, width: 15, tintColor: COLORS.themeColor }}
+                source={Images.Previous}
+              />
+              <Text style={styles.headerText}>Pay Using</Text>
+            </TouchableOpacity>
+            <CurrentTime />
+          </View>
           <LinearGradient
             colors={["#363636", "#1C1C1C", "#0f0f0f"]}
             style={{
@@ -200,6 +204,11 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginTop: 20,
     textAlign: "center",
+  },
+  headerContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
 });
 
