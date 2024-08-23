@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import Images from "../utils/Images";
 import { COLORS } from "../utils/Constant";
+import CurrentTime from "./CurrentTime";
 
 const DATA = [
   {
@@ -111,7 +112,10 @@ const Dashboard = (props) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.headerText}>For you</Text>
+      <View style={styles.headerContainer}>
+        <Text style={styles.headerText}>For you</Text>
+        <CurrentTime />
+      </View>
       <FlatList
         data={DATA}
         renderItem={({ item }) => (
@@ -168,6 +172,11 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 14,
     textAlign: "right",
+  },
+  headerContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
 });
 

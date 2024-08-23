@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import Images from "../utils/Images";
 import { COLORS } from "../utils/Constant";
+import CurrentTime from "./CurrentTime";
 
 const OrderScreen = (props) => {
   const itemDetails = props.route?.params?.itemDetails;
@@ -29,21 +30,23 @@ const OrderScreen = (props) => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          marginTop: 10,
-          marginHorizontal: 5,
-        }}
-        onPress={handleBackPress}
-      >
-        <Image
-          style={{ height: 15, width: 15, tintColor: COLORS.themeColor }}
-          source={Images.Previous}
-        />
-        <Text style={styles.header}>For you</Text>
-      </TouchableOpacity>
+      <View style={styles.headerContainer}>
+        <TouchableOpacity
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            marginHorizontal: 5,
+          }}
+          onPress={handleBackPress}
+        >
+          <Image
+            style={{ height: 15, width: 15, tintColor: COLORS.themeColor }}
+            source={Images.Previous}
+          />
+          <Text style={styles.header}>For you</Text>
+        </TouchableOpacity>
+        <CurrentTime />
+      </View>
 
       <ScrollView>
         <View style={styles.card}>
@@ -146,6 +149,12 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 16,
     textAlign: "center",
+  },
+  headerContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginTop: 10
   },
 });
 
