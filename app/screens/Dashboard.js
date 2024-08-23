@@ -19,6 +19,9 @@ const DATA = [
     image: Images.Pizza,
     backgroundColor: "#a8cc40",
     price: 150,
+    store: "Tiger Bite",
+    duration: "20 min",
+    ratings: "4.5",
   },
   {
     id: "2",
@@ -26,6 +29,9 @@ const DATA = [
     image: Images.Sandwich,
     backgroundColor: COLORS.themeColor,
     price: 50,
+    store: "Asad's Hot Chicken",
+    duration: "25 min",
+    ratings: "4.7",
   },
   {
     id: "3",
@@ -33,6 +39,9 @@ const DATA = [
     image: Images.Meal,
     backgroundColor: "#eba75b",
     price: 100,
+    store: "Asad's Hot Chicken",
+    duration: "40 min",
+    ratings: "4.9",
   },
   {
     id: "4",
@@ -40,6 +49,9 @@ const DATA = [
     image: Images.BurgerNew,
     backgroundColor: "#e47d8d",
     price: 120,
+    store: "Dixy Chicken",
+    duration: "15 min",
+    ratings: "4.2",
   },
   {
     id: "5",
@@ -47,20 +59,42 @@ const DATA = [
     image: Images.Meat,
     backgroundColor: "#67c7d1",
     price: 180,
+    store: "Stoke City",
+    duration: "10 min",
+    ratings: "4.1",
   },
 ];
 
 const Dashboard = (props) => {
   const handleNavigation = useCallback(
     (item) => {
-      props.navigation.navigate("OrderScreen", { itemDetails: item });
+      props.navigation.navigate("CategoriesList", { itemDetails: item });
     },
     [props.navigation]
   );
-  const Item = ({ title, image, price, backgroundColor }) => (
+  const Item = ({
+    title,
+    image,
+    price,
+    store,
+    duration,
+    ratings,
+    backgroundColor,
+  }) => (
     <TouchableOpacity
+      activeOpacity={0.7}
       style={[styles.item, { backgroundColor }]}
-      onPress={() => handleNavigation({ title, image, price, backgroundColor })}
+      onPress={() =>
+        handleNavigation({
+          title,
+          image,
+          price,
+          store,
+          duration,
+          ratings,
+          backgroundColor,
+        })
+      }
     >
       <Image
         style={{
@@ -89,6 +123,9 @@ const Dashboard = (props) => {
             title={item.title}
             image={item.image}
             price={item.price}
+            store={item.store}
+            ratings={item.ratings}
+            duration={item.duration}
             backgroundColor={item.backgroundColor}
           />
         )}

@@ -54,12 +54,18 @@ const OrderScreen = (props) => {
             <Image source={itemDetails?.image} style={styles.image} />
           ) : null}
           <View style={styles.quantityContainer}>
-            <TouchableOpacity onPress={decrementQuantity} style={styles.button}>
-              <Text style={styles.buttonText}>-</Text>
+            <TouchableOpacity onPress={decrementQuantity}>
+              <Image
+                source={Images.Minus}
+                style={{ width: 15, height: 15, tintColor: COLORS.themeColor }}
+              />
             </TouchableOpacity>
             <Text style={styles.quantity}>{quantity}</Text>
-            <TouchableOpacity onPress={incrementQuantity} style={styles.button}>
-              <Text style={styles.buttonText}>+</Text>
+            <TouchableOpacity onPress={incrementQuantity}>
+              <Image
+                source={Images.Plus}
+                style={{ width: 15, height: 15, tintColor: COLORS.themeColor }}
+              />
             </TouchableOpacity>
           </View>
           <Text style={styles.itemName}>{itemDetails?.title}</Text>
@@ -68,7 +74,7 @@ const OrderScreen = (props) => {
             onPress={() => handlePlaceOrder(itemDetails.price * quantity)}
           >
             <Text style={styles.orderButtonText}>
-              $ {itemDetails.price * quantity} Place order
+              £ {itemDetails.price * quantity} Place order
             </Text>
           </TouchableOpacity>
         </View>
@@ -121,6 +127,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   quantity: {
+    marginHorizontal: 5,
     color: "#fff",
     fontSize: 18,
   },
