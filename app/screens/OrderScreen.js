@@ -20,7 +20,7 @@ const OrderScreen = (props) => {
 
   const handlePlaceOrder = (total) => {
     props.navigation.navigate("AddressSelectionScreen", {
-      itemDetails: { ...itemDetails, total },
+      itemDetails: { ...itemDetails, total, quantity },
     });
   };
   const handleBackPress = () => {

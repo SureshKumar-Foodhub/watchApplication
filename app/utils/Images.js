@@ -14,19 +14,18 @@ const Images = {
   DeliveryMan: require("../utils/images/deliveryman.png"),
   Foodhub_Logo: require("../utils/images/foodhub_logo.png"),
   Burger: require("../utils/images/burger.png"),
-
   BurgerNew: require("../utils/images/BurgerNew.png"),
   Meat: require("../utils/images/Meat.png"),
   Pasta: require("../utils/images/Pasta.png"),
-
   Sandwich: require("../utils/images/Sandwich.png"),
   Fries: require("../utils/images/Fries.png"),
   PastaNew: require("../utils/images/PastaNew.png"),
   Meal: require("../utils/images/Meal.png"),
   OrderSuccessful: require("../utils/images/order_successful.png"),
-
   Star: require("../utils/images/star.png"),
   Plus: require("../utils/images/plus.png"),
   Minus: require("../utils/images/minus.png"),
+  CallAnswer: require("../utils/images/call.png"),
+  CallEnd: require("../utils/images/callend.png"),
 };
 export default Images;
