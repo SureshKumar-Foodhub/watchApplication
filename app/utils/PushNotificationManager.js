@@ -67,6 +67,7 @@ const PushNotificationManager = () => {
     await messaging()
       .getToken()
       .then((fcmToken) => {
+        console.log(fcmToken, "fcmToken");
         sendFcmTokenToServer({ token: fcmToken });
       });
   };
