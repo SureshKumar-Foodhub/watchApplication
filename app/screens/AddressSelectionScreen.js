@@ -42,23 +42,21 @@ const AddressSelectionScreen = (props) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.headerContainer}>
-        <TouchableOpacity
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            marginHorizontal: 5,
-          }}
-          onPress={handleBackPress}
-        >
-          <Image
-            style={{ height: 15, width: 15, tintColor: COLORS.themeColor }}
-            source={Images.Previous}
-          />
-          <Text style={styles.header}>Address</Text>
-        </TouchableOpacity>
-        <CurrentTime />
-      </View>
+      <CurrentTime />
+      <TouchableOpacity
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          marginHorizontal: 5,
+        }}
+        onPress={handleBackPress}
+      >
+        <Image
+          style={{ height: 15, width: 15, tintColor: COLORS.themeColor }}
+          source={Images.Previous}
+        />
+        <Text style={styles.header}>Address</Text>
+      </TouchableOpacity>
 
       <ScrollView>
         {addresses.map(({ label, address }) => (

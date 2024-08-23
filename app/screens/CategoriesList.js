@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import Images from "../utils/Images";
 import { COLORS } from "../utils/Constant";
+import CurrentTime from "./CurrentTime";
 
 const CategoriesList = (props) => {
   const itemDetails = props.route?.params?.itemDetails;
@@ -26,12 +27,12 @@ const CategoriesList = (props) => {
 
   return (
     <View style={styles.container}>
+      <CurrentTime />
       <TouchableOpacity
         style={{
+          marginHorizontal: 5,
           flexDirection: "row",
           alignItems: "center",
-          marginTop: 10,
-          marginHorizontal: 5,
         }}
         onPress={handleBackPress}
       >
@@ -85,14 +86,22 @@ const CategoriesList = (props) => {
           >
             £ {itemDetails?.price}
           </Text>
-          <TouchableOpacity activeOpacity={0.7} onPress={handleNavigation}>
+          <TouchableOpacity
+            style={{
+              marginBottom: 10,
+              backgroundColor: COLORS.themeColor,
+              borderRadius: 20,
+              paddingVertical: 7,
+              paddingHorizontal: 20,
+            }}
+            activeOpacity={0.7}
+            onPress={handleNavigation}
+          >
             <Text
               style={{
-                color: COLORS.themeColor,
-                fontSize: 12,
+                color: "#ffffff",
+                fontSize: 10,
                 textAlign: "center",
-                top: -5,
-                fontWeight: "500",
               }}
             >
               Click here to proceed...

@@ -11,10 +11,12 @@ const CurrentTime = () => {
 };
 
 const styles = StyleSheet.create({
-    timeText: {
-        color: '#fff',
-        fontSize: 13,
-    },
-})
+  timeText: {
+    textAlign: "right",
+    marginEnd: 7,
+    color: "#fff",
+    fontSize: 10,
+  },
+});
 
 export default CurrentTime;

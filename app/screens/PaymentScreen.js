@@ -37,6 +37,7 @@ const PaymentScreen = (props) => {
   };
   return (
     <View style={styles.container}>
+      <CurrentTime />
       {paymentStatus === "initial" && (
         <View style={{ flex: 1 }}>
           <View style={styles.headerContainer}>
@@ -44,7 +45,6 @@ const PaymentScreen = (props) => {
               style={{
                 flexDirection: "row",
                 alignItems: "center",
-                marginTop: 10,
                 marginHorizontal: 5,
               }}
               onPress={handleBackPress}
@@ -55,7 +55,6 @@ const PaymentScreen = (props) => {
               />
               <Text style={styles.headerText}>Pay Using</Text>
             </TouchableOpacity>
-            <CurrentTime />
           </View>
           <LinearGradient
             colors={["#363636", "#1C1C1C", "#0f0f0f"]}

@@ -112,9 +112,9 @@ const Dashboard = (props) => {
 
   return (
     <View style={styles.container}>
+      <CurrentTime />
       <View style={styles.headerContainer}>
         <Text style={styles.headerText}>For you</Text>
-        <CurrentTime />
       </View>
       <FlatList
         data={DATA}
@@ -143,7 +143,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#000",
-    paddingTop: 10,
   },
   headerText: {
     color: "#fff",

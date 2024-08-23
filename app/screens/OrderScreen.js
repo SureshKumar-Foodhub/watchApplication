@@ -30,6 +30,7 @@ const OrderScreen = (props) => {
 
   return (
     <View style={styles.container}>
+      <CurrentTime />
       <View style={styles.headerContainer}>
         <TouchableOpacity
           style={{
@@ -45,7 +46,6 @@ const OrderScreen = (props) => {
           />
           <Text style={styles.header}>For you</Text>
         </TouchableOpacity>
-        <CurrentTime />
       </View>
 
       <ScrollView>
@@ -154,7 +154,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    marginTop: 10
   },
 });
 
