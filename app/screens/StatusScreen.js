@@ -61,7 +61,7 @@ const StatusScreen = (props) => {
         clearTimeout(timeout);
       }
       setTimeoutSec(30);
-      setItemDetails(props.route.params.itemDetails)
+      setItemDetails(props.route.params.itemDetails);
       setCurrentStatus("ontheway");
     }
   }, [props.route.params]);
@@ -119,7 +119,7 @@ const StatusScreen = (props) => {
               <Text style={styles.statusLabel}>Order Received</Text>
               <Text
                 style={styles.info}
-              >{`${itemDetails?.quantity} * ${itemDetails?.title}, $${itemDetails?.total}`}</Text>
+              >{`${itemDetails?.quantity} * ${itemDetails?.title}, £${itemDetails?.total}`}</Text>
               <Text style={styles.statusNow}>NOW</Text>
               <Text style={styles.subText}>
                 {orderStatus === 0

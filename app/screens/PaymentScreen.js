@@ -189,9 +189,10 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   processingContainer: {
-    alignItems: "center",
-    justifyContent: "center",
     flex: 1,
+    marginTop: 50,
+    justifyContent: "center",
+    alignItems: "center",
   },
   processingText: {
     color: "#fff",
@@ -201,9 +202,10 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   successContainer: {
+    flex: 1,
+    marginTop: 50,
     alignItems: "center",
     justifyContent: "center",
-    flex: 1,
   },
   successIcon: {
     backgroundColor: "#0f0",
