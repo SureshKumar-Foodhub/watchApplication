@@ -226,7 +226,7 @@ const StatusScreen = (props) => {
                       fontWeight: "bold",
                     }}
                   >
-                    Call Delivery Boy
+                    Call Delivery Person
                   </Text>
                 </TouchableOpacity>
               </View>
