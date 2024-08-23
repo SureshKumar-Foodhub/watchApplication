@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import Images from "../utils/Images";
 import CurrentTime from "./CurrentTime";
+import { COLORS } from "../utils/Constant";
 
 let timeout = null;
 
@@ -76,24 +77,14 @@ const StatusScreen = (props) => {
       {/* Header */}
       <CurrentTime />
 
-      <View style={{ marginHorizontal: 10 }}>
+      <View style={{ marginHorizontal: 10, flex: 1 }}>
         <View style={styles.headerContainer}>
           <TouchableOpacity onPress={handleBackPress} style={styles.header}>
-            <View
-              style={{
-                width: 17,
-                height: 17,
-                borderRadius: 15,
-                backgroundColor: "#eb4d4b",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Image
-                style={{ height: 15, width: 15, tintColor: "white" }}
-                source={Images.Previous}
-              />
-            </View>
+            <Image
+              style={{ height: 15, width: 15, tintColor: COLORS.themeColor }}
+              source={Images.Previous}
+            />
+
             <Image
               style={styles.foodhubLogo}
               source={Images.Foodhub_Logo}
@@ -102,184 +93,181 @@ const StatusScreen = (props) => {
           </TouchableOpacity>
         </View>
         <ScrollView>
-          <View>
-            {/* Order Status */}
-            {currentStatus === "waiting" && (
-              <View style={styles.statusContainer}>
-                <Text style={styles.statusLabel}>Order Received</Text>
+          {/* <View> */}
+          {/* Order Status */}
+          {currentStatus === "waiting" && (
+            <View style={styles.statusContainer}>
+              <Text style={styles.statusLabel}>Order Received</Text>
+              <Text
+                style={styles.info}
+              >{`${itemDetails?.quantity} * ${itemDetails?.title}, $${itemDetails?.total}`}</Text>
+              <Text style={styles.statusNow}>NOW</Text>
+              <Text style={styles.subText}>
+                {orderStatus === 0
+                  ? `Awaiting restaurant confirmation.`
+                  : `Order Accepted`}
+              </Text>
+            </View>
+          )}
+
+          {/* Secondary Status */}
+          {currentStatus === "prepared" && (
+            <View style={styles.nextStatusContainer}>
+              <View style={styles.etaContainer}>
                 <Text
-                  style={styles.info}
-                >{`${itemDetails?.quantity} * ${itemDetails?.title}, $${itemDetails?.total}`}</Text>
-                <Text style={styles.statusNow}>NOW</Text>
-                <Text style={styles.subText}>
-                  {orderStatus === 0
-                    ? `Awaiting restaurant confirmation.`
-                    : `Order Accepted`}
+                  style={{
+                    fontSize: 12,
+                    textAlign: "center",
+                    color: "#000",
+                    fontWeight: "bold",
+                  }}
+                >
+                  30
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 10,
+                    textAlign: "center",
+                    color: "#000",
+                    fontWeight: "bold",
+                  }}
+                >
+                  MIN
                 </Text>
               </View>
-            )}
+              <Text style={styles.nextStatusLabel}>NEXT</Text>
+              <Text style={styles.nextSubText}>Food is Being Prepared</Text>
+              {/* <Text style={styles.etaText}>ETA: 30 mins</Text> */}
+            </View>
+          )}
 
-            {/* Secondary Status */}
-            {currentStatus === "prepared" && (
+          {currentStatus === "pickedup" && (
+            <View style={styles.pickedUpContainer}>
+              <Text style={styles.pickedUpLabel}>Order Picked Up</Text>
+              <Text style={styles.statusNow}>NOW</Text>
+              <Text style={styles.pickedUpSubText}>
+                Tasty food en route!{" "}
+                <Text style={styles.boldText}>Mohammed Khan</Text> has picked up
+                your order.
+              </Text>
+              {/* <Text style={styles.etaText}>ETA: 15 mins</Text> */}
+              <View style={styles.etaContainer}>
+                <Text
+                  style={{
+                    fontSize: 12,
+                    textAlign: "center",
+                    color: "#000",
+                    fontWeight: "bold",
+                  }}
+                >
+                  15
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 10,
+                    textAlign: "center",
+                    color: "#000",
+                    fontWeight: "bold",
+                  }}
+                >
+                  MIN
+                </Text>
+              </View>
+            </View>
+          )}
+
+          {currentStatus === "ontheway" && (
+            <View>
               <View style={styles.nextStatusContainer}>
-                <View style={styles.etaContainer}>
-                  <Text
-                    style={{
-                      fontSize: 12,
-                      textAlign: "center",
-                      color: "#000",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    30
-                  </Text>
-                  <Text
-                    style={{
-                      fontSize: 10,
-                      textAlign: "center",
-                      color: "#000",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    MIN
-                  </Text>
-                </View>
-                <Text style={styles.nextStatusLabel}>NEXT</Text>
-                <Text style={styles.nextSubText}>Food is Being Prepared</Text>
-                {/* <Text style={styles.etaText}>ETA: 30 mins</Text> */}
-              </View>
-            )}
-
-            {currentStatus === "pickedup" && (
-              <View style={styles.pickedUpContainer}>
-                <Text style={styles.pickedUpLabel}>Order Picked Up</Text>
-                <Text style={styles.statusNow}>NOW</Text>
-                <Text style={styles.pickedUpSubText}>
-                  Tasty food en route!{" "}
-                  <Text style={styles.boldText}>Mohammed Khan</Text> has picked
-                  up your order.
+                <Text style={styles.nextStatusLabel}>
+                  {itemDetails?.address?.address} ROTATE 1 Bath Place, Rivington
+                  St, London EC2A 3DA, United Kingdom
                 </Text>
-                {/* <Text style={styles.etaText}>ETA: 15 mins</Text> */}
-                <View style={styles.etaContainer}>
-                  <Text
-                    style={{
-                      fontSize: 12,
-                      textAlign: "center",
-                      color: "#000",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    15
-                  </Text>
-                  <Text
-                    style={{
-                      fontSize: 10,
-                      textAlign: "center",
-                      color: "#000",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    MIN
-                  </Text>
-                </View>
+                <Text style={styles.nextSubText}>Your order is on the way</Text>
+                <Text style={styles.etaText}>
+                  On time, reaching near you in 12 minutes
+                </Text>
               </View>
-            )}
-
-            {currentStatus === "ontheway" && (
               <View>
-                <View style={styles.nextStatusContainer}>
-                  <Text style={styles.nextStatusLabel}>
-                    {itemDetails?.address?.address}
-                  </Text>
-                  <Text style={styles.nextSubText}>
-                    Your order is on the way
-                  </Text>
-                  <Text style={styles.etaText}>
-                    On time, reaching near you in 12 minutes
-                  </Text>
-                </View>
-                <View>
-                  <TouchableOpacity
-                    onPress={handleCallStart}
-                    style={styles.callButton}
-                  >
-                    <Image
-                      style={{ width: 15, height: 15 }}
-                      resizeMode="contain"
-                      tintColor={"#fff"}
-                      source={Images.CallAnswer}
-                    />
-                    <Text
-                      style={{
-                        fontSize: 12,
-                        color: "#fff",
-                        marginLeft: 5,
-                        fontWeight: "bold",
-                      }}
-                    >
-                      Call Delivery Boy
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
-            )}
-
-            {currentStatus === "delivered" && (
-              <View>
-                <View style={styles.nextStatusContainer}>
-                  <Text
-                    style={{
-                      color: "#fff",
-                      textAlign: "center",
-                      fontWeight: "bold",
-                      marginBottom: 5,
-                    }}
-                  >
-                    Order Delivered
-                  </Text>
-                  <Text style={styles.nextStatusLabel}>
-                    Your order has been delivered. Bon apetite!
-                  </Text>
-                </View>
-
                 <TouchableOpacity
-                  activeOpacity={0.8}
-                  style={styles.nextStatusContainer}
-                  onPress={handleGotoHome}
-                >
-                  <Text style={{ color: "#fff", textAlign: "center" }}>
-                    OK, GOT IT
-                  </Text>
-                </TouchableOpacity>
-                <Text style={{ color: "#fff", fontSize: 9, marginTop: 5 }}>
-                  {"Not Delivered?"}
-                </Text>
-              </View>
-            )}
-            <Modal visible={showModal}>
-              <View style={styles.callModalContainer}>
-                <Text
-                  style={{ color: "#fff", fontSize: 15, fontWeight: "bold" }}
-                >
-                  {"+44 7380308571"}
-                </Text>
-                <Text style={{ color: "#fff", fontSize: 12, marginTop: 5 }}>
-                  {"Outgoing Call..."}
-                </Text>
-                <TouchableOpacity
-                  onPress={handleCallEnd}
-                  style={styles.callEndButton}
+                  onPress={handleCallStart}
+                  style={styles.callButton}
                 >
                   <Image
-                    style={styles.callEnd}
+                    style={{ width: 15, height: 15 }}
                     resizeMode="contain"
-                    source={Images.CallEnd}
+                    tintColor={"#fff"}
+                    source={Images.CallAnswer}
                   />
+                  <Text
+                    style={{
+                      fontSize: 12,
+                      color: "#fff",
+                      marginLeft: 5,
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Call Delivery Boy
+                  </Text>
                 </TouchableOpacity>
               </View>
-            </Modal>
-          </View>
+            </View>
+          )}
+
+          {currentStatus === "delivered" && (
+            <View>
+              <View style={styles.nextStatusContainer}>
+                <Text
+                  style={{
+                    color: "#fff",
+                    textAlign: "center",
+                    fontWeight: "bold",
+                    marginBottom: 5,
+                  }}
+                >
+                  Order Delivered
+                </Text>
+                <Text style={styles.nextStatusLabel}>
+                  Your order has been delivered. Bon apetite!
+                </Text>
+              </View>
+
+              <TouchableOpacity
+                activeOpacity={0.8}
+                style={styles.nextStatusContainer}
+                onPress={handleGotoHome}
+              >
+                <Text style={{ color: "#fff", textAlign: "center" }}>
+                  OK, GOT IT
+                </Text>
+              </TouchableOpacity>
+              <Text style={{ color: "#fff", fontSize: 9, marginTop: 5 }}>
+                {"Not Delivered?"}
+              </Text>
+            </View>
+          )}
         </ScrollView>
+        <Modal visible={showModal}>
+          <View style={styles.callModalContainer}>
+            <Text style={{ color: "#fff", fontSize: 15, fontWeight: "bold" }}>
+              {"+44 7380308571"}
+            </Text>
+            <Text style={{ color: "#fff", fontSize: 12, marginTop: 5 }}>
+              {"Outgoing Call..."}
+            </Text>
+            <TouchableOpacity
+              onPress={handleCallEnd}
+              style={styles.callEndButton}
+            >
+              <Image
+                style={styles.callEnd}
+                resizeMode="contain"
+                source={Images.CallEnd}
+              />
+            </TouchableOpacity>
+          </View>
+        </Modal>
+        {/* </View> */}
       </View>
     </View>
   );
@@ -338,7 +326,6 @@ const styles = StyleSheet.create({
     color: "#B0B0B0",
     fontSize: 14,
     fontWeight: "bold",
-    marginBottom: 5,
   },
   nextSubText: {
     color: "#fff",

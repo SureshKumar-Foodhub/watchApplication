@@ -19,11 +19,11 @@ const AddressSelectionScreen = (props) => {
   const addresses = [
     {
       label: "Home",
-      address: "10, Nehru Street, Sakthi Nagar, Madurai - 625121",
+      address: "ROTATE 1 Bath Place, Rivington St, London EC2A 3DA, UK",
     },
     {
       label: "Work",
-      address: "438, Phils Bistro, KK Nagar, Madurai - 625020",
+      address: "120 Goldhawk Rd, London W12 8HD, UK",
     },
   ];
 
@@ -136,12 +136,13 @@ const styles = StyleSheet.create({
   },
   addressLabel: {
     color: "#fff",
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: "bold",
   },
   addressText: {
     color: "#B0B0B0",
     marginTop: 5,
+    fontSize: 14,
   },
   circle: {
     width: 20,
@@ -151,15 +152,15 @@ const styles = StyleSheet.create({
   },
   nextButton: {
     backgroundColor: COLORS.themeColor,
-    borderRadius: 10,
-    padding: 10,
+    borderRadius: 20,
+    padding: 7,
     margin: 10,
   },
   nextText: {
     color: "#fff",
     textAlign: "center",
-    fontSize: 15,
-    fontWeight: "bold",
+    fontSize: 14,
+    //fontWeight: "bold",
   },
   headerContainer: {
     flexDirection: "row",

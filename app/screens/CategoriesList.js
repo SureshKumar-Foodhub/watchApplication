@@ -104,7 +104,7 @@ const CategoriesList = (props) => {
                 textAlign: "center",
               }}
             >
-              Click here to proceed...
+              Click here to proceed
             </Text>
           </TouchableOpacity>
         </View>

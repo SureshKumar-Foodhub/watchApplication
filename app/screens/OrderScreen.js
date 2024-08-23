@@ -76,6 +76,15 @@ const OrderScreen = (props) => {
             <Text style={styles.orderButtonText}>
               £ {itemDetails.price * quantity} Place order
             </Text>
+            {/* <Image
+              style={{
+                height: 10,
+                width: 10,
+                tintColor: "#fff",
+                transform: [{ rotate: "180deg" }],
+              }}
+              source={Images.BackIcon}
+            /> */}
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -129,6 +138,7 @@ const styles = StyleSheet.create({
   quantity: {
     marginHorizontal: 5,
     color: "#fff",
+    fontWeight: "600",
     fontSize: 18,
   },
   itemName: {
@@ -136,18 +146,21 @@ const styles = StyleSheet.create({
     fontSize: 15,
     marginTop: 5,
     textAlign: "center",
+    fontWeight: "600",
   },
   orderButton: {
+    // flexDirection: "row",
     backgroundColor: COLORS.themeColor,
-    borderRadius: 10,
-    padding: 10,
+    borderRadius: 20,
+    padding: 7,
     width: width * 0.8,
     alignItems: "center",
+    // justifyContent:'space-between',
     marginVertical: 10,
   },
   orderButtonText: {
     color: "#fff",
-    fontSize: 16,
+    fontSize: 14,
     textAlign: "center",
   },
   headerContainer: {

@@ -6,6 +6,7 @@ import {
   StyleSheet,
   ActivityIndicator,
   Image,
+  ScrollView,
 } from "react-native";
 import Images from "../utils/Images";
 import LinearGradient from "react-native-linear-gradient";
@@ -56,46 +57,59 @@ const PaymentScreen = (props) => {
               <Text style={styles.headerText}>Pay Using</Text>
             </TouchableOpacity>
           </View>
-          <LinearGradient
-            colors={["#363636", "#1C1C1C", "#0f0f0f"]}
-            style={{
-              justifyContent: "center",
-              borderRadius: 15,
-              marginTop: 10,
-              marginHorizontal: 15,
-              paddingHorizontal: 10,
-              paddingVertical: 10,
-            }}
-          >
-            <Image
-              source={Images.Foodhub_Logo}
-              style={{ width: 90, height: 16, tintColor: COLORS.themeColor }}
-            />
-            <Text style={styles.creditsAvailable}>Credits available</Text>
-            <Text style={styles.creditAmount}>£ 1550</Text>
-          </LinearGradient>
-          <View style={{ marginTop: 20 }}>
-            <Text style={styles.useCreditsText}>Use Credits</Text>
-            <TouchableOpacity onPress={handlePayPress} style={styles.payButton}>
-              <Text style={styles.payText}>Pay £{itemDetails?.total}</Text>
-              <Image
+          <ScrollView>
+            <View>
+              <LinearGradient
+                colors={["#363636", "#1C1C1C", "#0f0f0f"]}
                 style={{
-                  height: 12,
-                  width: 12,
-                  tintColor: "#ffffff",
-                  transform: [{ rotate: "180deg" }],
+                  justifyContent: "center",
+                  borderRadius: 15,
+                  marginTop: 10,
+                  marginHorizontal: 15,
+                  paddingHorizontal: 10,
+                  paddingVertical: 10,
                 }}
-                source={Images.BackIcon}
-              />
-            </TouchableOpacity>
-          </View>
+              >
+                <Image
+                  source={Images.Foodhub_Logo}
+                  style={{
+                    width: 90,
+                    height: 16,
+                    tintColor: COLORS.themeColor,
+                  }}
+                />
+                <Text style={styles.creditsAvailable}>Wallet Balance</Text>
+                <Text style={styles.creditAmount}>£ 1550</Text>
+              </LinearGradient>
+              <View style={{ marginTop: 20 }}>
+                <Text style={styles.useCreditsText}>Use Wallet</Text>
+                <TouchableOpacity
+                  onPress={handlePayPress}
+                  style={styles.payButton}
+                >
+                  <Text style={styles.payText}>Pay £{itemDetails?.total}</Text>
+                  <Image
+                    style={{
+                      height: 12,
+                      width: 12,
+                      tintColor: "#ffffff",
+                      transform: [{ rotate: "180deg" }],
+                    }}
+                    source={Images.BackIcon}
+                  />
+                </TouchableOpacity>
+              </View>
+            </View>
+          </ScrollView>
         </View>
       )}
 
       {paymentStatus === "processing" && (
         <View style={styles.processingContainer}>
           <ActivityIndicator size="large" color="#00ff00" />
-          <Text style={styles.processingText}>Processing payment</Text>
+          <Text
+            style={styles.processingText}
+          >{`${"Processing"}\n${"Payment"}`}</Text>
         </View>
       )}
 
@@ -108,7 +122,9 @@ const PaymentScreen = (props) => {
             source={Images.OrderSuccessful}
             style={{ width: 60, height: 60 }}
           />
-          <Text style={styles.successText}>Payment Sucessful</Text>
+          <Text
+            style={styles.successText}
+          >{`${"Payment"}\n${"Sucessful"}`}</Text>
         </View>
       )}
     </View>
@@ -181,6 +197,7 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 20,
     marginTop: 20,
+    fontWeight: "500",
     textAlign: "center",
   },
   successContainer: {
@@ -202,6 +219,7 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 20,
     marginTop: 20,
+    fontWeight: "500",
     textAlign: "center",
   },
   headerContainer: {

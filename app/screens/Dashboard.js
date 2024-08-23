@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
   },
   headerText: {
     color: "#fff",
-    fontSize: 24,
+    fontSize: 20,
     marginStart: 10,
   },
   list: {
